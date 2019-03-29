@@ -1,0 +1,88 @@
+<% include ../views/partials/header %>
+<a class="btn btn-primary" data-toggle="collapse" href="#addPerson" role="button" aria-expanded="false" aria-controls="addPerson">
+    Adicionar Nova Pessoa
+</a>
+<a class="btn btn-primary" data-toggle="collapse" href="#addLocation" role="button" aria-expanded="false" aria-controls="addLocation">
+    Adicionar Nova Localidade
+</a>
+<a class="btn btn-primary" data-toggle="collapse" href="#connectFriends" role="button" aria-expanded="false" aria-controls="connectFriends">
+    Conectar Amigos
+</a>
+<a class="btn btn-primary" data-toggle="collapse" href="#connectLocation" role="button" aria-expanded="false" aria-controls="connectLocation">
+        Conectar Localidade
+</a>
+<br></br>
+<div class="collapse" id="addPerson">
+    <div class="card card-body">
+        <h3>Adicionar nova pessoa</h3>
+        <form method="POST" action="/person/add">
+            <input type="text" name="name" placeholder="Nome">
+            <input type="submit" value="Gravar" class="btn btn-outline-primary btn-sm">
+        </form>
+    </div>
+</div>
+
+<div class="collapse" id="addLocation">
+    <div class="card card-body">
+        <h3>Adicionar nova localidade</h3>
+        <form method="POST" action="/location/add">
+            <input type="text" name="city" placeholder="Cidade">
+            <input type="text" name="state" placeholder="Estado">
+            <input type="submit" value="Gravar" class="btn btn-outline-primary btn-sm">
+        </form>
+    </div>
+</div>
+
+<div class="collapse" id="connectFriends">
+    <div class="card card-body">
+        <h3>Conectar amigos</h3>
+        <form method="POST" action="/friends/connect">
+            <input type="text" name="name1" placeholder="Nome">
+            <input type="text" name="name2" placeholder="Nome">
+            <input type="submit" value="Gravar" class="btn btn-outline-primary btn-sm">
+        </form>
+    </div>
+</div>
+
+<div class="collapse" id="connectLocation">
+    <div class="card card-body">
+        <h3>Conectar localidade</h3>
+        <form method="POST" action="/person/born/add">
+            <input type="text" name="name" placeholder="Nome">
+            <input type="text" name="city" placeholder="Cidade">
+            <input type="text" name="state" placeholder="Estado">
+            <input type="text" name="year" placeholder="Ano">
+            <input type="submit" value="Gravar" class="btn btn-outline-primary btn-sm">
+        </form>
+    </div>
+</div>
+
+<h3>Lista de pessoas</h3>
+<div class="row">
+    <% persons.forEach(function(person){ %>
+        <div class="col-md-3">
+            <div class="card bg-light">
+                    <div class="card-body">
+                        <i class="fas fa-user"></i>
+                        <a href="/person/<%= person.id %>"><%= person.name %></a>
+                    </div>
+                </div>
+        </div>
+    <% }) %> 
+</div>
+  
+
+<h3>Lista de Localidades</h3>
+<div class="row">
+    <% locations.forEach(function(location){ %>
+        <div class="col-md-3">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <%= location.city %>, <%= location.state %>
+                </div>
+            </div>
+        </div>
+    <% }) %> 
+</div>
+<% include ../views/partials/footer %>

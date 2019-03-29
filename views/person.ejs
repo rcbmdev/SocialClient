@@ -1,0 +1,36 @@
+<% include ../views/partials/header %>
+<a href="/">Voltar a Página Principal</a>
+<br></br>
+<h3><i class="fas fa-user"></i><%= name %></h3>
+<%if(city) { %>
+<h4><i class="fas fa-map-marker-alt"></i>Cidade natal: <br> <%= city %>, <%= state %></h4>
+<% } %>
+
+<%if(friends.length > 0) { %>
+    Lista de amigos
+    <ul class="list-group">
+        <% friends.forEach(function(person) { %>
+            <li class="list-group-item"><a href="/person/<%= person.id %>"><%= person.name %></a></li>
+        <% }); %>
+    </ul>
+<% } %>
+
+<h3>Adicionar Amigos</h3>
+<form method="POST" action="/friends/connect">
+    <input type="hidden" name="id" value="<%= id %>">
+    <input type="hidden" name="name1" value="<%= name %>">
+    <input type="text" name="name2" placeholder="Nome">
+    <input type="submit" value="Gravar" class="btn btn-outline-primary btn-sm">
+</form>
+
+<h3>Conectar localidade</h3>
+<form method="POST" action="/person/born/add">
+    <input type="hidden" name="id" value="<%= id %>">
+    <input type="hidden" name="name" value="<%= name %>">
+    <input type="text" name="city" placeholder="Cidade">
+    <input type="text" name="state" placeholder="Estado">
+    <input type="text" name="year" placeholder="Ano">
+    <input type="submit" value="Gravar" class="btn btn-outline-primary btn-sm">
+</form>
+
+<% include ../views/partials/footer %>
